@@ -6,7 +6,7 @@ import clamp from 'clamp';
 var Choices = [{
   text: "Ever told on a brotha?",
   answer: "Nope!",
-  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+  imageLink: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Jonas_Brothers_2009.jpg" 
 },
 {
   text: "Ever squeezed a trigger?",
@@ -16,7 +16,7 @@ var Choices = [{
 {
   text: "Ever set a brotha up?",
   answer: "Nope!",
-  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+  imageLink: "http://photos1.meetupstatic.com/photos/event/b/5/2/d/event_40006381.jpeg" 
 },
 {
   text: "Ever helped a brother out when he was down on his luck?",
@@ -26,12 +26,12 @@ var Choices = [{
 {
   text: "You a sap?",
   answer: "Nope!",
-  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+  imageLink: "http://www.carcleaningguru.com/files/2012/07/tree-sap-removal.jpg" 
 },
 {
   text: "You a boss player, you a mack?",
   answer: "Yup!",
-  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+  imageLink: "http://www.theplace.ru/archive/bernie_mac/img/b3.jpg" 
 },
 {
   text: "Let me hold a couple dollars?",
@@ -41,7 +41,7 @@ var Choices = [{
 {
   text: "Y'all still be poppin' y'all collars?",
   answer: "Yup!",
-  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+  imageLink: "http://tictcreative.com/wp-content/uploads/2011/10/bro.png" 
 },
 {
   text: "Stock rims on a scraper?",
@@ -243,10 +243,10 @@ class Flix extends Component {
     return (
       <View style={styles.container}>
         <Animated.View style={[styles.card, animatedCardStyles, {backgroundColor: this.state.person}]} {...this._panResponder.panHandlers}>
-        <Image source={{uri: "http://images.guff.com/gallery/image/b2ravthccaeh0jh"}}/>
-        <Text>{this.state.choice.text}</Text>
+        <Image source={{uri: this.state.choice.imageLink}} style={styles.cardImage}/>
+        <Text style = {styles.choiceText}>{this.state.choice.text}</Text>
         </Animated.View>
-
+        
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
           <Text style={styles.nopeText}>Nope!</Text>
@@ -270,6 +270,15 @@ var styles = StyleSheet.create({
     top: 100,
     height: 285,
     backgroundColor: 'red',
+  },
+  cardImage: {
+    position: 'absolute',
+    width: 375,
+    height: 285
+  },
+  choiceText:{
+    top: 300,
+    fontSize: 18
   },
   yup: {
     borderColor: 'green',

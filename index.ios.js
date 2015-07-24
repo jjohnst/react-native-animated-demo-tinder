@@ -1,7 +1,129 @@
 'use strict';
 
-import React, { AppRegistry, StyleSheet, Text, View, Animated, Component, PanResponder, } from 'react-native';
+import React, { AppRegistry, StyleSheet, Text, Image, View, Animated, Component, PanResponder, } from 'react-native';
 import clamp from 'clamp';
+
+var Choices = [{
+  text: "Ever told on a brotha?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Ever squeezed a trigger?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Ever set a brotha up?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Ever helped a brother out when he was down on his luck?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "You a sap?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "You a boss player, you a mack?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Let me hold a couple dollars?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Y'all still be poppin' y'all collars?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Stock rims on a scraper?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Paint wetter than a lake?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Poodle in my blood?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Bitch, I'm a thug?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "You a loser?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Winner?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Starvin'?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Dinner?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "You still sell dope?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Now you cleaner than a bar of Dove soap?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Got a little gouda?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "Got a thumper, got a Ruger?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "You in love wit' the ho?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "She bringin' you the dough?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "You gon' cry if she leave?",
+  answer: "Nope!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+},
+{
+  text: "You gon' fly overseas?",
+  answer: "Yup!",
+  imageLink: "http://images.guff.com/gallery/image/b2ravthccaeh0jh" 
+}
+];
 
 const People = [
   'red',
@@ -21,15 +143,19 @@ class Flix extends Component {
       pan: new Animated.ValueXY(),
       enter: new Animated.Value(0.5),
       person: People[0],
+      choice: Choices[0],
     }
   }
 
   _goToNextPerson() {
     let currentPersonIdx = People.indexOf(this.state.person);
+    let currentChoice = Choices.indexOf(this.state.choice);
     let newIdx = currentPersonIdx + 1;
+    let newChoiceIdx = currentChoice + 1;
 
     this.setState({
-      person: People[newIdx > People.length - 1 ? 0 : newIdx]
+      person: People[newIdx > People.length - 1 ? 0 : newIdx],
+      choice: Choices[newChoiceIdx > Choices.length - 1 ? 0 : newChoiceIdx]
     });
   }
 
@@ -117,7 +243,10 @@ class Flix extends Component {
     return (
       <View style={styles.container}>
         <Animated.View style={[styles.card, animatedCardStyles, {backgroundColor: this.state.person}]} {...this._panResponder.panHandlers}>
+        <Image source={{uri: "http://images.guff.com/gallery/image/b2ravthccaeh0jh"}}/>
+        <Text>{this.state.choice.text}</Text>
         </Animated.View>
+
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
           <Text style={styles.nopeText}>Nope!</Text>
@@ -134,13 +263,12 @@ class Flix extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
   },
   card: {
-    width: 200,
-    height: 200,
+    top: 100,
+    height: 285,
     backgroundColor: 'red',
   },
   yup: {

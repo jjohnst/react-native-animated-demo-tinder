@@ -48,10 +48,11 @@ class GameScreen extends Component {
       person: People[0],
       choice: Choices[0],
       //set prevChoice to right answer
-      prevChoice: Choices[Choices.length -1],
+      prevChoice: Choices[0],
       time: Date.now(),
       totalTime: 0,
-      response: " ",
+      response: "Nope!",
+      prevResponse: " ",
       beginning: true,
       correct: true,
       score: 0
@@ -69,6 +70,7 @@ class GameScreen extends Component {
       person: People[newIdx > People.length - 1 ? 0 : newIdx],
       prevChoice: this.state.choice,
       choice: Choices[newChoiceIdx > Choices.length -1 ? 0 : newChoiceIdx],
+      prevResponse: this.state.response,
       response: this.state.pan.x._value > 0 ? "Yup!" : "Nope!",
       totalTime: this.state.totalTime + Date.now() - this.state.time,
       time: Date.now()
@@ -81,11 +83,12 @@ class GameScreen extends Component {
 
   //need to make sure the correct response is being compared to the previous answer
   //{this.state.response === this.state.prevChoice.answer ? "You were right" : "You were wrong"}
-  // _updateScore(){
-  //   this.setState({
-  //     score: 
-  //   })
-  // }
+  _updateScore(){
+    
+    this.setState({
+      score: this.state.response === this.state.prevChoice.answer ? this.state.score +10 : this.state.score
+    });
+  }
 
   _animateEntrance() {
     Animated.spring(
@@ -139,8 +142,9 @@ class GameScreen extends Component {
   }
 
   _resetState() {
+    this._updateScore();
     this._goToNextChoice();
-    //this._updateScore();
+    
     this.state.pan.setValue({x: 0, y: 0});
     this.state.enter.setValue(0);
     this._animateEntrance();
@@ -167,8 +171,9 @@ class GameScreen extends Component {
 
     return (
       <View style={styles.container}>
-        
+        <Text style= {styles.score} >Score: {this.state.score}</Text>
         <Text style= {styles.timer}>Total Time: {(this.state.totalTime)/1000}</Text>
+        <Text>Resp: {this.state.response} Current: {this.state.prevChoice.answer}</Text>
         <Text>{this.state.beginning == false ? (this.state.response === this.state.prevChoice.answer ? "You were right" : "You were wrong") : ""}</Text>
         <Animated.View style={[styles.card, animatedCardStyles, {backgroundColor: this.state.person}]} {...this._panResponder.panHandlers}>
           <Text style = {styles.question}>{this.state.choice.choiceText}</Text>

@@ -3,4 +3,5 @@ Animated API in React Native
 
 Example game using E-40 Choices lyrics
 
-![](http://giant.gfycat.com/ForkedGrizzledAfricangroundhornbill.gif)
+![](https://giant.gfycat.com/ForkedGrizzledAfricangroundhornbill.gif)
+
